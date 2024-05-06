@@ -4,46 +4,51 @@ Contains the class DBStorage
 """
 
 import models
-from models.tags import Amenity
 from models.base_model import BaseModel, Base
-from models.book import City
-from models.place import Place
-from models.review import Review
-from models.state import State
-from models.user import User
+from models.book import Books
+from models.book_tags import Books_tags
+from models.tags import Tags
+from models.book import Books
+
 from os import getenv
 import sqlalchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 
-available_classes = {"Amenity": Amenity, "City": City,
-           "Place": Place, "Review": Review, "State": State, "User": User}
+available_classes = {
+    "Books": Books,
+    "tags": Tags,
+    "Books_tags": Books_tags,
+}
+
+association_tables = {"Books_tags": Books_tags}
 
 
 class DBStorage:
     """interaacts with the MySQL database"""
     __engine = None
-    __session = None
+    __session: scoped_session = None
 
-    def __init__(self):
+    def __init__(self, test=False):
         """Instantiate a DBStorage object"""
-        HBNB_ENV = getenv('HBNB_ENV')
         self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.
-                                      format("admin",
-                                             "00admin",
+                                      format("root",
+                                             "123",
                                              "localhost",
-                                             "online_lib"))
-        if HBNB_ENV == "test":
+                                             "online_lib"), echo=True)
+        if True == test:
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
         """query on the current database session"""
         new_dict = {}
         for key in available_classes:
-            if cls is None or cls is available_classes[key] or cls is key:
+            if (cls is None or cls is available_classes[key]
+                    or cls is key) and cls not in association_tables.values():
+
                 objs = self.__session.query(available_classes[key]).all()
                 for obj in objs:
-                    key = obj.__class__.__name__ + '.' + obj.id
+                    key = obj.__class__.__name__ + '.' + str(obj.id)
                     new_dict[key] = obj
         return (new_dict)
 
@@ -71,7 +76,7 @@ class DBStorage:
         """call remove() method on the private session attribute"""
         self.__session.remove()
 
-    def get(self, cls, id):
+    def get(self, cls: BaseModel, id):
         """
         Returns the object based on the class name and its ID, or
         None if not found
@@ -79,12 +84,23 @@ class DBStorage:
         if cls not in available_classes.values():
             return None
 
-        all_cls = models.storage.all(cls)
-        for value in all_cls.values():
-            if (value.id == id):
-                return value
+        result = self.__session.query(cls).filter(
+            cls.id.in_([id]))
 
-        return None
+        return result.scalar()
+
+    def getBy_name(self, cls: BaseModel, name):
+        """
+        Returns the object based on the class name, or
+        None if not found
+        """
+        if cls not in available_classes.values():
+            return None
+
+        result = self.__session.query(cls).filter(
+            cls.name.in_([name]))
+
+        return result.scalar()
 
     def count(self, cls=None):
         """
