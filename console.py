@@ -4,17 +4,17 @@
 import cmd
 from datetime import datetime
 import models
-from models.tags import Amenity
-from models.User import BaseModel
-from models.book import City
-from models.place import Place
+from models.tags import Tags
 from models.review import Review
-from models.state import State
-from models.Book import User
+from models.book_tags import Books_tags
+from models.book import Books
 import shlex  # for splitting the line along spaces except in double quotes
 
-available_classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
-           "Place": Place, "Review": Review, "State": State, "User": User}
+available_classes = {
+    "Books": Books,
+    "tags": Tags,
+    "Books_tags": Books_tags,
+}
 
 
 class HBNBCommand(cmd.Cmd):
