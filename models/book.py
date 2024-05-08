@@ -6,7 +6,6 @@ import sqlalchemy
 from sqlalchemy import Column, String, ForeignKey, Integer, Index
 from sqlalchemy.orm import relationship
 # from user import user_library_association
-import inspect
 
 
 class Books(BaseModel, Base):
@@ -25,5 +24,4 @@ class Books(BaseModel, Base):
 
     def __init__(self, *args, **kwargs):
         """initializes Book"""
-        print("/************", inspect.getmembers(self))
         super().__init__(*args, **kwargs)

@@ -23,7 +23,7 @@ class BaseModel:
     id = Column(
         String(60),
         nullable=False,
-        default=uuid.uuid4(),
+        default=uuid.uuid4,
         primary_key=True)
 
     def __init__(self, *args, **kwargs):
