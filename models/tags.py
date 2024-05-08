@@ -9,7 +9,7 @@ from sqlalchemy import UniqueConstraint
 
 
 class Tags(BaseModel, Base):
-    """Representation of Amenity """
+    """Representation of tags """
     __table_args__ = (UniqueConstraint("name", name='tag_name'),)
 
     __tablename__ = 'tags'
@@ -22,5 +22,5 @@ class Tags(BaseModel, Base):
     )
 
     def __init__(self, *args, **kwargs):
-        """initializes Amenity"""
+        """initializes tags"""
         super().__init__(*args, **kwargs)
