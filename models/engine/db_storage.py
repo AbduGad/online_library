@@ -32,8 +32,8 @@ class DBStorage:
     def __init__(self, test=False):
         """Instantiate a DBStorage object"""
         self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.
-                                      format("abdo",
-                                             "ebdo",
+                                      format("root",
+                                             "123",
                                              "localhost",
                                              "online_lib"), echo=True)
         if True == test:
