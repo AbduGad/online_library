@@ -14,6 +14,9 @@ class Books(BaseModel, Base):
     name = Column(String(100), nullable=False)
     author = Column(String(100), nullable=False)
     path = Column(String(100), nullable=False)
+    cover_img_path = Column(String(100), nullable=False)
+    author_summary = Column(String(100), nullable=False)
+    author_img_path = Column(String(100), nullable=False)
     tags = relationship("Tags", secondary="book_tags", back_populates="books")
     __table_args__ = (
         Index('idx_books_name', name),  # Add this line

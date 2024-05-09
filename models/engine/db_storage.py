@@ -121,7 +121,7 @@ class DBStorage:
         self.cls_validate(cls, null_safety=True)
 
         result = self.__session.query(cls).filter(
-            cls.id.in_([id]))
+            cls.id == id)
 
         return result.scalar()
         # if cls not in available_classes.values():
@@ -159,7 +159,7 @@ class DBStorage:
         # if result is not None and result.first() is not None:
         #     print("going outtttttt", result.first().name)
 
-        return result.first()
+        return result.scalar()
 
     def count(self, cls=None):
         """
