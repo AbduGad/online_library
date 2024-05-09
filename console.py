@@ -19,7 +19,7 @@ available_classes = {
 
 class HBNBCommand(cmd.Cmd):
     """ HBNH console """
-    prompt = '(hbnb) '
+    prompt = '(Online_lib)'
 
     def do_EOF(self, arg):
         """Exits console"""

@@ -18,12 +18,12 @@ Base = declarative_base()
 
 class BaseModel:
     __tablename__ = "BaseModel"
-    created_at = Column(DateTime, nullable=False, default=datetime.utcnow())
-    updated_at = Column(DateTime, nullable=False, default=datetime.utcnow())
+    created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
+    updated_at = Column(DateTime, nullable=False, default=datetime.utcnow)
     id = Column(
         String(60),
         nullable=False,
-        default=uuid.uuid4(),
+        default=uuid.uuid4,
         primary_key=True)
 
     def __init__(self, *args, **kwargs):

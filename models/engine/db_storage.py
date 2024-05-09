@@ -47,6 +47,7 @@ class DBStorage:
                     or cls is key) and cls not in association_tables.values():
 
                 objs = self.__session.query(available_classes[key]).all()
+
                 for obj in objs:
                     key = obj.__class__.__name__ + '.' + str(obj.id)
                     new_dict[key] = obj
@@ -76,7 +77,7 @@ class DBStorage:
         """call remove() method on the private session attribute"""
         self.__session.remove()
 
-    def get(self, cls: BaseModel, id):
+    def get(self, cls, id):
         """
         Returns the object based on the class name and its ID, or
         None if not found
@@ -84,10 +85,12 @@ class DBStorage:
         if cls not in available_classes.values():
             return None
 
-        result = self.__session.query(cls).filter(
-            cls.id.in_([id]))
+        all_cls = models.storage.all(cls)
+        for value in all_cls.values():
+            if (value.id == id):
+                return value
 
-        return result.scalar()
+        return None
 
     def getBy_name(self, cls: BaseModel, name):
         """
