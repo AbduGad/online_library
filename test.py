@@ -58,7 +58,11 @@ class TestYourClass(unittest.TestCase):
         storage.new(newbook2)
         storage.save()
 
-        newbook3 = Books(name="test_book3", author="test_auther3", path="/")
+        newbook3 = Books(
+            name="test_book3",
+            author="test_auther3",
+            path="/",
+        )
         self.assertEqual(newbook3.name, "test_book3")
         self.assertEqual(newbook3.author, "test_auther3")
         self.assertEqual(newbook3.path, "/")
@@ -86,7 +90,7 @@ class TestYourClass(unittest.TestCase):
         storage.drop_dataBase()
 
     def test_02_delete_function(self):
-        print("3333-------------------------")
+        print("3-------------------------")
         self.assertEqual(None, None)
         storage.reload()
 
@@ -107,6 +111,7 @@ class TestYourClass(unittest.TestCase):
 
         book1 = storage.get(Books, "random id ")
 
+        self.assertEqual(book1, None)
         self.assertEqual(newbook1.name, "test_book1")
         self.assertNotEqual(newbook1.name, "test_book")
 
@@ -119,9 +124,11 @@ class TestYourClass(unittest.TestCase):
 
         self.assertEqual(book2.name, "test_book2")
         self.assertEqual(book3.name, "test_book3")
+
+        storage.delete()
         storage.close()
 
-        storage.drop_dataBase()
+        # storage.drop_dataBase()
 
 
 if __name__ == '__main__':

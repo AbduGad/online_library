@@ -75,15 +75,12 @@ class DBStorage:
         """add the object to the current database session"""
         self.subclass_instance_validate(cls, null_safety=True)
         if cls is None:
-            self.close()
             # print("value error (in db_stroge new function)")
-            raise ValueError("none is not allowed")
+            raise ValueError("none value")
         # if cls is not None and not any(isinstance(cls, obj)
         #                                for obj in available_classes.values()):
         #     raise TypeError(f"({cls} ,{type(cls)}) is not supported")
-        print("adding")
         self.__session.add(cls)
-        print("added to the session successfully")
 
     def save(self):
         """commit all changes of the current database session"""

@@ -12,6 +12,4 @@ storage = DBStorage(
     check_create_database=True,
 
 )
-
 storage.reload()
-print("reloadeeeeeeeeeeeeeeeeeeeeeeed")
