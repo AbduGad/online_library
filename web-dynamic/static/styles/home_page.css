@@ -149,6 +149,18 @@ div #search-box {
 	max-width: 100%;
 }
 
+.images p {
+	margin-left: 50px;
+	min-width: 200px;
+	max-width: 201px;
+	font-size:small;
+	font-weight: 700;
+	font-family:Verdana, Geneva, Tahoma, sans-serif;
+	text-wrap: wrap;
+	font-style:italic;
+	overflow-wrap: break-word;
+}
+
 .images img {
     width: 200px; /* Adjust the width of each image */
     height: 300px;
@@ -160,6 +172,7 @@ div #search-box {
 .images img:hover {
     transform: scale(1.5); /* Zoom effect on hover */
 	box-shadow: -15px 20px 40px rgba(0, 0, 0, 0.5);
+	margin-bottom: 70px;
 }
 
 .images img.magnified {
