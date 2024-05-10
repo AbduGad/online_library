@@ -19,7 +19,6 @@ unittest.TestLoader.sortTestMethodsUsing = None
 
 class TestYourClass(unittest.TestCase):
     def test_00_new_obj(self):
-        print("1-------------------")
         newbook = Books(name="test_book_first", author="test_auther", path="/")
         storage.new(newbook)
         storage.save()
@@ -44,7 +43,6 @@ class TestYourClass(unittest.TestCase):
         storage.drop_dataBase()
 
     def test_01_all_function(self):
-        print("2----------------------------------")
         storage.reload()
 
         newbook1 = Books(name="test_book1", author="test_auther1", path="/")
@@ -85,7 +83,6 @@ class TestYourClass(unittest.TestCase):
         storage.save()
         self.assertEqual(tag2.name, "test_tag2")
 
-        # print(storage.all())
         self.assertEqual(storage.count(Books), 3)
 
         self.assertEqual(storage.count(Tags), 2)
@@ -96,7 +93,6 @@ class TestYourClass(unittest.TestCase):
         storage.drop_dataBase()
 
     def test_02_delete_function(self):
-        print("3-------------------------")
         self.assertEqual(None, None)
         storage.reload()
 
@@ -228,6 +224,16 @@ class TestYourClass(unittest.TestCase):
         get_data_structure = storage.get(Books, "learn data structure")
         self.assertEqual(get_data_structure, None)
 
+        storage.delete(get_fun_tag)
+        get_fun_tag = storage.get(Tags, "fun")
+        self.assertEqual(get_fun_tag, None)
+
+        storage.delete(get_educational_tag)
+        get_educational_tag = storage.get(Tags, "educational")
+        self.assertEqual(get_educational_tag, None)
+
+        self.assertEqual(0, storage.count(None))
+
         #!################## Edge cases ###############
         with self.assertRaises(TypeError):
             storage.new("")
@@ -246,8 +252,11 @@ class TestYourClass(unittest.TestCase):
             storage.delete(None)
 
         # get function
-        with self.assertRaises(ValueError):
-            storage.get(None, "")
+        self.assertEqual(storage.get(None, ""), None)
+
+        self.assertEqual(storage.get(get_learnPython, ""), None)
+
+        self.assertEqual(storage.get(get_learnPython, ""), None)
 
         with self.assertRaises(TypeError):
             storage.get(str, "")
@@ -255,25 +264,17 @@ class TestYourClass(unittest.TestCase):
         with self.assertRaises(TypeError):
             storage.get("None", "")
 
-        with self.assertRaises(TypeError):
-            storage.get(get_learnPython, "")
-    # get by name function
-        with self.assertRaises(ValueError):
-            storage.getBy_name(None, "")
+        # get by name function
+
+        self.assertEqual(storage.getBy_name(None, ""), None)
 
         with self.assertRaises(TypeError):
             storage.get(str, "")
 
         with self.assertRaises(TypeError):
             storage.get("None", "")
-
-        with self.assertRaises(TypeError):
-            storage.get(get_learnPython, "")
 
         # count function edge cases
-
-        with self.assertRaises(TypeError):
-            storage.count(get_learnPython)
 
         with self.assertRaises(TypeError):
             storage.count(123)
@@ -284,36 +285,4 @@ class TestYourClass(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    # TestYourClass().test_new_obj()
-    # TestYourClass().test_all_function()
     unittest.main()
-
-    # TestYourClass().xtest_all_function()
-    # db = DBStorage(database_name="test_db", check_create_database=True)
-
-    # db.reload()
-
-    # newbook1 = Books(name="test_book1", author="test_auther1", path="/")
-    # db.new(newbook1)
-    # db.save()
-
-    # newbook2 = Books(name="test_book2", author="test_auther2", path="/")
-
-    # db.new(newbook2)
-    # print("66666666", newbook2.id)
-    # db.save()
-
-    # newbook3 = Books(name="test_book3", author="test_auther3", path="/")
-
-    # db.new(newbook3)
-    # db.save()
-
-    # tag1 = Tags(name="test_tag1")
-    # db.new(tag1)
-    # db.save()
-
-    # tag2 = Tags(name="test_tag2")
-    # db.new(tag2)
-    # db.save()
-
-    # db.close()

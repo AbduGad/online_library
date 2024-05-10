@@ -118,7 +118,10 @@ class DBStorage:
         Returns the object based on the class name and its ID, or
         None if not found
         """
-        self.cls_validate(cls, null_safety=True)
+        if cls is None:
+            return None
+
+        self.cls_validate(cls, null_safety=False)
 
         result = self.__session.query(cls).filter(
             cls.id == str(id))
@@ -129,7 +132,10 @@ class DBStorage:
         Returns the object based on the class name, or
         None if not found
         """
-        self.cls_validate(cls, null_safety=True)
+        if cls is None:
+            return None
+
+        self.cls_validate(cls, null_safety=False)
 
         # print(
         #     "going innnnnnnnnnnnnnn",
@@ -153,7 +159,8 @@ class DBStorage:
 
     def count(self, cls=None):
         """
-        count the number of objects in storage
+        count the number of the givin class in storage ,if the givin
+        obj is null , return number of all the objects in the storage
         """
         all_class = available_classes.values()
         self.cls_validate(cls)
