@@ -215,6 +215,18 @@ class TestYourClass(unittest.TestCase):
         self.assertIn((get_learnPython.tags)[1].name, ("fun", "educational"))
         self.assertIn((get_learnCpp.tags)[0].name, ("educational"))
         self.assertIn((get_data_structure.tags)[0].name, ("educational"))
+        #! test delete
+        storage.delete(get_learnPython)
+        get_learnPython = storage.getBy_name(Books, "learn python")
+        self.assertEqual(get_learnPython, None)
+
+        storage.delete(get_learnCpp)
+        get_learnPython = storage.get(Books, "learn cpp in 5 days")
+        self.assertEqual(get_learnPython, None)
+
+        storage.delete(get_data_structure)
+        get_data_structure = storage.get(Books, "learn data structure")
+        self.assertEqual(get_data_structure, None)
 
         #!################## Edge cases ###############
         with self.assertRaises(TypeError):
