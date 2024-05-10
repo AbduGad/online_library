@@ -59,15 +59,24 @@ class DBStorage:
         self.cls_validate(cls)
 
         for key in available_classes:
+            print(
+                cls,
+                available_classes.values(),
+                (cls is None),
+                cls not in association_tables.values(),
+                (cls is None) and cls not in association_tables.values())
+
             if (cls is None or cls is available_classes[key]
                     or cls is key) and cls not in association_tables.values():
 
                 objs = self.__session.query(available_classes[key]).all()
+
                 for cls in objs:
                     key = cls.__class__.__name__ + '.' + str(cls.id)
                     new_dict[key] = cls
 
         # print("5555555555", self.dataBase_name)
+        # print(f"{cls}", new_dict)
         # print(f"{cls}", len(new_dict))
         return (new_dict)
 
@@ -118,8 +127,7 @@ class DBStorage:
         self.cls_validate(cls, null_safety=True)
 
         result = self.__session.query(cls).filter(
-            cls.id == id)
-
+            cls.id == str(id))
         return result.scalar()
         # if cls not in available_classes.values():
         #     return None
@@ -162,9 +170,7 @@ class DBStorage:
         """
         count the number of objects in storage
         """
-
         all_class = available_classes.values()
-
         self.cls_validate(cls)
 
         if not cls:

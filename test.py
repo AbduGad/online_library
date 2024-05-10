@@ -5,7 +5,6 @@ Contains class BaseModel
 from models.engine.db_storage import DBStorage
 from models.book import Books
 from models.tags import Tags
-# from models.storage import storage
 from models import storage
 import unittest
 unittest.TestLoader.sortTestMethodsUsing = None
@@ -119,16 +118,83 @@ class TestYourClass(unittest.TestCase):
         self.assertEqual(newbook3.name, "test_book3")
         self.assertEqual(tag1.name, "test_tag1")
 
+        book1 = storage.getBy_name(Books, "test_book1")
         book2 = storage.getBy_name(Books, "test_book2")
         book3 = storage.getBy_name(Books, "test_book3")
 
+        self.assertEqual(book1.name, "test_book1")
         self.assertEqual(book2.name, "test_book2")
         self.assertEqual(book3.name, "test_book3")
 
-        storage.delete()
+        tag1 = storage.getBy_name(Tags, "test_tag1")
+        tag2 = storage.getBy_name(Tags, "test_tag2")
+
+        storage.delete(book1)
+        storage.delete(book2)
+        storage.delete(book3)
+        book1 = storage.getBy_name(Books, "test_book1")
+        book2 = storage.getBy_name(Books, "test_book2")
+        book3 = storage.getBy_name(Books, "test_book3")
+
+        self.assertEqual(book1, None)
+        self.assertEqual(book2, None)
+        self.assertEqual(book3, None)
+
+        storage.delete(tag1)
+        storage.delete(tag2)
+
+        tag1 = storage.getBy_name(Tags, "test_tag1")
+        tag2 = storage.getBy_name(Tags, "test_tag2")
+
+        self.assertEqual(tag1, None)
+        self.assertEqual(tag2, None)
         storage.close()
 
-        # storage.drop_dataBase()
+        storage.drop_dataBase()
+
+    def test_03_edgeCases(self):
+        storage.reload()
+
+        educational_tag = Tags(name="educational")
+        educational_tag.save()
+
+        fun_tag = Tags(name="fun")
+        fun_tag.save()
+
+        learnPython = Books(
+            name="learn python", author="blue", path="/")
+        learnPython.tags.append(fun_tag)
+        learnPython.tags.append(educational_tag)
+        learnPython.save()
+
+        learnCpp = newbook1 = Books(
+            name="learn cpp in 5 days", author="ahmed", path="/")
+        learnCpp.tags.append(educational_tag)
+        learnCpp.save()
+
+        learn_dataStructure = newbook1 = Books(
+            name="learn data structure", author="ibrahem", path="/")
+        learn_dataStructure.tags.append(educational_tag)
+        learn_dataStructure.save()
+
+        get_fun_tag = storage.getBy_name(Tags, "fun")
+        get_educational_tag = storage.getBy_name(Tags, "educational")
+
+        get_learnPython = storage.get(Books, learnPython.id)
+        get_learnCpp = storage.get(Books, learnCpp.id)
+
+        get_data_structure = storage.getBy_name(
+            Books, name="learn data structure")
+
+        # with self.assertRaises(ValueError):
+        #     storage.all(None)
+
+        with self.assertRaises(TypeError):
+            storage.all(str)
+
+        # self.assertEqual(storage.count(), 5)
+        print("888888888888888888888888888888888888888888888888")
+        self.assertEqual(len(storage.all()), 5)
 
 
 if __name__ == '__main__':
