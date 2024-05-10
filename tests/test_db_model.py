@@ -2,11 +2,18 @@
 """
 Contains class BaseModel
 """
-from models.engine.db_storage import DBStorage
-from models.book import Books
-from models.tags import Tags
-from models import storage
 import unittest
+
+
+# import  tests.set_test_env models to set database to test_db
+from set_test_env import set_testEnv
+from models import storage
+from models.tags import Tags
+from models.book import Books
+from models.engine.db_storage import DBStorage
+set_testEnv
+
+
 unittest.TestLoader.sortTestMethodsUsing = None
 
 
@@ -153,6 +160,7 @@ class TestYourClass(unittest.TestCase):
         storage.drop_dataBase()
 
     def test_03_edgeCases(self):
+
         storage.reload()
 
         educational_tag = Tags(name="educational")
@@ -186,17 +194,81 @@ class TestYourClass(unittest.TestCase):
         get_data_structure = storage.getBy_name(
             Books, name="learn data structure")
 
-        # with self.assertRaises(ValueError):
-        #     storage.all(None)
-
         with self.assertRaises(TypeError):
             storage.all(str)
 
-        # self.assertEqual(storage.count(), 5
-        # for key, value in (storage.all()).items():
-        #     print("555555555555555", key, value)
+        self.assertEqual(len(storage.all(None)), 5)
 
-        self.assertEqual(len(storage.all()), 5)
+        from models.book_tags import Books_tags
+        self.assertFalse(any(isinstance(item, Books_tags)
+                         for item in storage.all(None)))
+
+        self.assertNotEqual(get_learnPython.name, None)
+        self.assertTrue(isinstance(get_learnPython.name, str))
+
+        self.assertEqual(len(get_learnPython.tags), 2)
+        self.assertEqual(len(get_data_structure.tags), 1)
+        self.assertEqual(len(get_learnCpp.tags), 1)
+
+        #!test tags_book relation
+        self.assertIn((get_learnPython.tags)[0].name, ("fun", "educational"))
+        self.assertIn((get_learnPython.tags)[1].name, ("fun", "educational"))
+        self.assertIn((get_learnCpp.tags)[0].name, ("educational"))
+        self.assertIn((get_data_structure.tags)[0].name, ("educational"))
+
+        #!################## Edge cases ###############
+        with self.assertRaises(TypeError):
+            storage.new("")
+
+        # delete function
+        with self.assertRaises(ValueError):
+            storage.delete(None)
+
+        with self.assertRaises(TypeError):
+            storage.delete(str)
+
+        with self.assertRaises(TypeError):
+            storage.delete(Books)
+
+        with self.assertRaises(ValueError):
+            storage.delete(None)
+
+        # get function
+        with self.assertRaises(ValueError):
+            storage.get(None, "")
+
+        with self.assertRaises(TypeError):
+            storage.get(str, "")
+
+        with self.assertRaises(TypeError):
+            storage.get("None", "")
+
+        with self.assertRaises(TypeError):
+            storage.get(get_learnPython, "")
+    # get by name function
+        with self.assertRaises(ValueError):
+            storage.getBy_name(None, "")
+
+        with self.assertRaises(TypeError):
+            storage.get(str, "")
+
+        with self.assertRaises(TypeError):
+            storage.get("None", "")
+
+        with self.assertRaises(TypeError):
+            storage.get(get_learnPython, "")
+
+        # count function edge cases
+
+        with self.assertRaises(TypeError):
+            storage.count(get_learnPython)
+
+        with self.assertRaises(TypeError):
+            storage.count(123)
+
+        with self.assertRaises(TypeError):
+            storage.count("unsupported type")
+        ####################################
 
 
 if __name__ == '__main__':

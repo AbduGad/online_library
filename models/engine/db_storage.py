@@ -29,7 +29,7 @@ class DBStorage:
 
     def __init__(
             self, instance_name,
-            database_name="online_lib",
+            database_name,
             test=False,
             check_create_database=False, ):
         """Instantiate a DBStorage object"""
@@ -123,15 +123,6 @@ class DBStorage:
         result = self.__session.query(cls).filter(
             cls.id == str(id))
         return result.scalar()
-        # if cls not in available_classes.values():
-        #     return None
-
-        # all_cls = self.all(cls)
-        # for value in all_cls.values():
-        #     if (value.id == id):
-        #         return value
-
-        return None
 
     def getBy_name(self, cls: BaseModel, name):
         """
