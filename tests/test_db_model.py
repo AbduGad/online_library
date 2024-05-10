@@ -156,7 +156,6 @@ class TestYourClass(unittest.TestCase):
         storage.drop_dataBase()
 
     def test_03_edgeCases(self):
-
         storage.reload()
 
         educational_tag = Tags(name="educational")
@@ -282,6 +281,7 @@ class TestYourClass(unittest.TestCase):
         with self.assertRaises(TypeError):
             storage.count("unsupported type")
         ####################################
+        storage.drop_dataBase()
 
 
 if __name__ == '__main__':
