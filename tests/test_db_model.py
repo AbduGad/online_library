@@ -281,6 +281,7 @@ class TestYourClass(unittest.TestCase):
         with self.assertRaises(TypeError):
             storage.count("unsupported type")
         ####################################
+        storage.close()
         storage.drop_dataBase()
 
 
