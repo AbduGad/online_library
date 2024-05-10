@@ -192,8 +192,10 @@ class TestYourClass(unittest.TestCase):
         with self.assertRaises(TypeError):
             storage.all(str)
 
-        # self.assertEqual(storage.count(), 5)
-        print("888888888888888888888888888888888888888888888888")
+        # self.assertEqual(storage.count(), 5
+        # for key, value in (storage.all()).items():
+        #     print("555555555555555", key, value)
+
         self.assertEqual(len(storage.all()), 5)
 
 

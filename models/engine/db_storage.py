@@ -59,25 +59,19 @@ class DBStorage:
         self.cls_validate(cls)
 
         for key in available_classes:
-            print(
-                cls,
-                available_classes.values(),
-                (cls is None),
-                cls not in association_tables.values(),
-                (cls is None) and cls not in association_tables.values())
+            # print(
+            #     (cls is None or cls is available_classes[key]
+            # or cls is key) and cls key in association_tables.values(), key)
 
-            if (cls is None or cls is available_classes[key]
-                    or cls is key) and cls not in association_tables.values():
+            if (cls is None or cls is available_classes[key] or cls is key) and \
+                    available_classes[key] not in association_tables.values():
 
                 objs = self.__session.query(available_classes[key]).all()
 
-                for cls in objs:
-                    key = cls.__class__.__name__ + '.' + str(cls.id)
-                    new_dict[key] = cls
+                for obj in objs:
+                    key = obj.__class__.__name__ + '.' + str(obj.id)
+                    new_dict[key] = obj
 
-        # print("5555555555", self.dataBase_name)
-        # print(f"{cls}", new_dict)
-        # print(f"{cls}", len(new_dict))
         return (new_dict)
 
     def new(self, cls):
