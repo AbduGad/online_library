@@ -52,16 +52,27 @@
 							</p>
 						</div>
 						<div style="width: 35%; margin-left: calc(20% - 30px);margin-right:30px; margin-top:2%; background-color: transparent">
+						
+							{% if  books|length == 0%}
+							<h1>no author selected</h1>
+							{% else %}
 							<h2><img src="../static/images/{%set book_first = books|first%}{{book_first.author_img_path}}" alt="author img" style="max-width: 50px;"/>
 							{{book_first.author}}
 							</h2>
 							<p style="text-wrap:wrap;">
 								{{book_first.author_summary}} 
 							</p>
+								{% endif %}
+
 						</div>
 					</div>
 						<div class="gallery">
 							<div class="images">
+
+
+							{%if  books|length == 0 %}
+							<div><h1> no books found </h1></div>
+							{% else %}
 								{%for book in books%}
 								<div>
 									<a href='http://127.0.0.1:5000/books/{{book.name}}'>
@@ -70,6 +81,7 @@
 									<p>{{(book.name).split('.pdf')[0]}}</p>
 								</div>
 								{% endfor %}
+								{% endif %}
 								<!--<img src="../static/images/test_image.jpeg" alt="Image 2">
 								<img src="../static/images/test_image.jpeg" alt="Image 3">
 								<img src="../static/images/test_image.jpeg" alt="Image 3">

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Magnified Image at Specific Position</title>
+<style>
+  .gallery {
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .images {
+	margin-top: 50px;
+    display: inline-flex;
+	height: 500px;
+  }
+
+  .images img {
+    width: 200px; /* Adjust the width of each image */
+    height: 300px;
+    margin: 0 10px; /* Adjust the margin between images */
+    transition: transform 0.3s ease; /* Smooth transition */
+  }
+
+  .images img:hover {
+    transform: scale(1.1); /* Zoom effect on hover */
+  }
+
+  .images img.magnified {
+    transform: scale(1.2); /* Magnified image */
+  }
+</style>
+</head>
+<body>
+
+<div class="gallery">
+  <div class="images">
+    <img src="F:\Alx\ALX Programing\online_library\test_image.jpeg" alt="Image 1">
+    <img src="F:\Alx\ALX Programing\online_library\test_image.jpeg" alt="Image 2">
+    <img src="F:\Alx\ALX Programing\online_library\test_image.jpeg" alt="Image 3">
+	hhhhhhhhhhhhhhhhh
+    <!-- Add more images as needed -->
+  </div>
+</div>
+
+<script>
+window.addEventListener('scroll', function() {
+  var scrollPosition = window.scrollY;
+  var imagePosition = document.querySelector('.images img').getBoundingClientRect().top + scrollPosition;
+  var threshold = 200; // Adjust the threshold as needed
+
+  if (imagePosition < threshold) {
+    document.querySelector('.images img').classList.add('magnified');
+  } else {
+    document.querySelector('.images img').classList.remove('magnified');
+  }
+});
+</script>
+
+</body>
+</html>
+

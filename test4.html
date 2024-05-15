@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centered Div with Margins</title>
+    <style>
+        /* Resetting default margin and padding for html and body */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex; /* Use flexbox to center content */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+        }
+
+        /* Style for the container */
+        .container {
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            margin: 10% auto;
+            background-color: lightgray;
+            border: 4px solid transparent; /* Transparent border to create space for the background color */
+            background-clip: padding-box; /* Apply background color to padding box including border */
+            box-shadow: 
+                4px 0 0 red, /* Right side border with red color */
+                -4px 0 0 blue; /* Left side border with blue color */
+        }
+    </style>
+</head>
+<body>
+    <!-- Container div -->
+    <div class="container">
+        <!-- Content goes here -->
+    </div>
+</body>
+</html>

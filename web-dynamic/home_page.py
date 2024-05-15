@@ -21,6 +21,7 @@ def close_db(error):
 @app.route('/home/', strict_slashes=False)
 def hbnb():
     """ Home page is live! """
+
     books = storage.all(Books).values()
 
     tags = storage.all(Tags).values()
@@ -29,11 +30,13 @@ def hbnb():
                            books=books,
                            tags=tags)
 
+
 @app.route('/books/<book_name>', strict_slashes=False)
 def open_book(book_name):
     """ Opens pdf """
     return render_template('book_page.html',
                            book_name=book_name)
+
 
 if __name__ == "__main__":
     """ Main Function """
