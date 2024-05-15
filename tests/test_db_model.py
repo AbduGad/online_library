@@ -2,17 +2,23 @@
 """
 Contains class BaseModel
 """
-import unittest
+import os
+import sys
 
+# from tests.set_test_env import set_testEnv, set_parent_dir
+# ? import set_test_env
 
-# import  tests.set_test_env models to set database to test_db
-from set_test_env import set_testEnv
-from models import storage
-from models.tags import Tags
-from models.book import Books
+os.environ['test_db'] = 'true'
+
+parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+
+sys.path.append(parent_dir)
+
 from models.engine.db_storage import DBStorage
-set_testEnv
-
+from models.book import Books
+from models.tags import Tags
+from models import storage
+import unittest
 
 unittest.TestLoader.sortTestMethodsUsing = None
 
@@ -164,19 +170,20 @@ class TestYourClass(unittest.TestCase):
         fun_tag = Tags(name="fun")
         fun_tag.save()
 
-        learnPython = Books(
-            name="learn python", author="blue", path="/")
+        learnPython = Books(name="learn python", author="blue", path="/")
         learnPython.tags.append(fun_tag)
         learnPython.tags.append(educational_tag)
         learnPython.save()
 
         learnCpp = newbook1 = Books(
-            name="learn cpp in 5 days", author="ahmed", path="/")
+            name="learn cpp in 5 days", author="ahmed", path="/"
+        )
         learnCpp.tags.append(educational_tag)
         learnCpp.save()
 
         learn_dataStructure = newbook1 = Books(
-            name="learn data structure", author="ibrahem", path="/")
+            name="learn data structure", author="ibrahem", path="/"
+        )
         learn_dataStructure.tags.append(educational_tag)
         learn_dataStructure.save()
 
@@ -195,8 +202,10 @@ class TestYourClass(unittest.TestCase):
         self.assertEqual(len(storage.all(None)), 5)
 
         from models.book_tags import Books_tags
-        self.assertFalse(any(isinstance(item, Books_tags)
-                         for item in storage.all(None)))
+
+        self.assertFalse(
+            any(isinstance(item, Books_tags) for item in storage.all(None))
+        )
 
         self.assertNotEqual(get_learnPython.name, None)
         self.assertTrue(isinstance(get_learnPython.name, str))
@@ -285,5 +294,5 @@ class TestYourClass(unittest.TestCase):
         storage.drop_dataBase()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
