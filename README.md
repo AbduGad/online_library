@@ -37,7 +37,7 @@ Online Library is a web application that allows users to read books online. It p
 3. Run the development server:
 
    ```
-   python home_page.py runserver
+   python3 -m web-dynamic.home_page
    ```
 
 4. Access the application in your web browser at `http://localhost:5000`.
