@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 	<head>
 		<meta charset="UTF-8">
-		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='home_page.css') }}" />
+		<link rel="stylesheet" type="text/css" href="../static/styles/home_page.css" />
 		<script src="../static/scrpits/home_page.js"></script>
 		<title>ReadMe</title>
 	</head>
@@ -40,11 +40,11 @@
 				</div>
 				<div class="horizontal-line">
 				</div>
-				<div style="display: flex; flex-direction:column; width: 90%">
-					<div style="display: flex; flex-direction:row; width: 100%; background-color:transparent">	
-						<div style="margin-top: 2%; margin-left: 2%; background-color:transparent; height:fit-content; width: 40%;">
+				<div class="content">
+					<div class="content-top-row">	
+						<div class="content-headline">
 							<input id="search-box" placeholder="Search for books..."/>
-							<h1 style="font-family: Andale Mono, monospace; font-size: 45px; margin-top: 8%">
+							<h1 class="content-h1">
 								Keep the story going..
 							</h1>
 							<p style="font-size: larger; font-weight: 500;">
@@ -56,7 +56,7 @@
 							{% if  books|length == 0%}
 							<h1>no author selected</h1>
 							{% else %}
-							<h2><img src="../static/images/{%set book_first = books|first%}{{book_first.author_img_path}}" alt="author img" style="max-width: 50px;"/>
+							<h2><img src="../static/images/pdf_images/{%set book_first = books|first%}{{book_first.author_img_path}}" alt="author img" style="max-width: 50px;"/>
 							{{book_first.author}}
 							</h2>
 							<p style="text-wrap:wrap;">
@@ -75,8 +75,8 @@
 							{% else %}
 								{%for book in books%}
 								<div>
-									<a href='http://127.0.0.1:5000/books/{{book.name}}'>
-										<img src="../static/images/{{book.cover_img_path}}" alt="Image 1">
+									<a href='http://127.0.0.1:9000/books/{{book.name}}'>
+										<img src="../static/images/pdf_images/{{book.cover_img_path}}" alt="Image 1">
 									</a>
 									<p>{{(book.name).split('.pdf')[0]}}</p>
 								</div>

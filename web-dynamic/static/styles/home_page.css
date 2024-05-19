@@ -133,6 +133,32 @@ div #search-box {
 	background-color: transparent;
 }
 
+div.content {
+	display: flex; 
+	flex-direction:column; 
+	width: 90%;
+}
+
+div.content-top-row {
+	display: flex; 
+	flex-direction:row; 
+	width: 100%; 
+	background-color:transparent;
+}
+
+div.content-headline {
+	margin-top: 2%; 
+	margin-left: 2%; 
+	background-color:transparent; 
+	height:fit-content; width: 40%;
+}
+
+h1.content-h1 {
+	font-family: Andale Mono, monospace;
+	font-size: 45px;
+	margin-top: 8%;
+}
+
 .gallery {
     width: 100%;
     overflow-x: scroll;
