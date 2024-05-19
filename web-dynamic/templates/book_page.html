@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 	<head>
 		<meta charset="UTF-8">
-		<link rel="stylesheet" type="text/css" href="../static/styles/home_page.css" />
+		<link rel="stylesheet" type="text/css" href="../static/styles/book_page.css" />
 		<script src="../static/scrpits/home_page.js"></script>
 		<title>{{book_name}}</title>
 	</head>
@@ -18,9 +18,11 @@
 						</button>
 					</div>
 					<div class="home-button">
+						<a href="http://localhost:9000/home/">
 						<button class="styled-button">
 							<img alt="home button" src="../static/images/home-2-svgrepo-com.svg">
 						</button>
+						</a>
 					</div>
 					<div class="tags-button">
 						<button class="styled-button" onclick="toggleShadow()">
@@ -40,7 +42,7 @@
 				</div>
 				<div class="horizontal-line">
 				</div>
-				<embed src="../static/{{book_name}}" type="application/pdf" width="100%" height="100%">
+				<embed src="../static/{{book_name}}" type="application/pdf" width="100%" height="100%" style="margin-left: 0.3%;">
 		</div>
 	</body>
 </html>
