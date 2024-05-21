@@ -19,7 +19,7 @@ def close_db(error):
 
 
 @app.route('/home/', strict_slashes=False)
-def hbnb():
+def home():
     """ Home page is live! """
 
     books = storage.all(Books).values()
@@ -39,7 +39,11 @@ def open_book(book_name):
     return render_template('book_page.html',
                            book=book)
 
+@app.route('/landing/', strict_slashes=False)
+def landing_page():
+    """ Landing page """
+    return render_template('landing_page.html')
 
 if __name__ == "__main__":
     """ Main Function """
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=9000)
