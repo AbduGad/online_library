@@ -27,7 +27,8 @@ def main():
         check_broken_Symbolic_link(destination_path)
 
     elif os.path.exists(destination_path):
-        print(f"Path exists but is not a symbolic link: {destination_path}")
+        raise FileExistsError(
+            f"Path exists but is not a symbolic link: {destination_path}")
 
     else:
         # Create the symbolic link
