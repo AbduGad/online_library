@@ -34,7 +34,8 @@ def add(item):
         relative_path, status_code = handle_pdf_upload(request)
 
         if status_code != 200:
-            return relative_path
+            err = relative_path
+            return Response(err, status_code)
 
     attr_data, att_tags = process_data(data)
 
@@ -132,6 +133,23 @@ def get_relative_path(path):
 
 
 def handle_pdf_upload(request) -> str:
+    """saves the uploaded PDF file, retrieves the relative path of
+    the saved file, and returns the path with a success status code or
+    an error message with a failure status code.
+
+
+    Args:
+        request (Request): the given request excepted
+        to have a pdf file
+
+
+    Returns:
+        str: the relative path of the saved pdf or
+        an error massage if something wrong happened
+
+        int: a status code indicating failure or success:
+        200 if success or 500 if failed
+    """
     try:
         absolute_path = save_pdf_file(request.files['pdf'])
 
