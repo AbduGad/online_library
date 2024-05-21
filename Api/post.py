@@ -31,20 +31,23 @@ def add(item):
     data = request.form.to_dict(flat=False)
 
     if 'pdf' in request.files:
+        relative_path, status_code = handle_pdf_upload(request)
 
-        relative_path = handle_pdf_upload(request)
-
-        if relative_path.status_code != 200:
+        if status_code != 200:
             return relative_path
 
     attr_data, att_tags = process_data(data)
+
+    set_relative_path(attr_data, relative_path)
+
+    print(attr_data)
 
     try:
         instance = create_instance(cls, attr_data, att_tags)
         instance.save()
 
     except Exception as e:
-        return Response(str(e), status=500)
+        return Response(str(e), status=502)
 
     return Response("Posted successfully", status=200)
 
@@ -65,6 +68,7 @@ def process_data(data):
 
     if data.get("tags"):
         tags = {"tags,": data["tags"], }
+
     return attrs, tags
 
 
@@ -129,16 +133,20 @@ def get_relative_path(path):
 
 def handle_pdf_upload(request) -> str:
     try:
-        absolute_path = save_pdf_file(request.files['pdff'])
+        absolute_path = save_pdf_file(request.files['pdf'])
 
         if absolute_path is None:
             raise FileExistsError("failed to save the pdf file")
 
         relative_path_pdf = get_relative_path(absolute_path)
-        return Response(relative_path_pdf, status=200)
+        return (relative_path_pdf, 200)
 
     except Exception as e:
-        return Response(str(e), 500)
+        return (str(e), 500)
+
+
+def set_relative_path(data: dict, relative_path: str):
+    data["path"] = relative_path
 
 
 app.run(debug=True, port=5600, host="0.0.0.0")
