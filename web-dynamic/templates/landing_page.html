@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="../static/styles/landing_page.css" />
+		<script src="../static/scrpits/home_page.js"></script>
+		<title>Online Library</title>
+	</head>
+	<body>
+		<div class="page">
+			<div class="left-half-background"></div>
+			<div class="right-half-background"></div>
+			<div class="content">
+				<header>
+					<div class="container">
+						<h1><img alt="svg image" src="../static/images/bookshelf-svgrepo-com.svg" style="height: 50px; background-color: #ffffff; margin-top: -30px">
+							Welcome to the Online Library</h1>
+						<nav>
+							<ul>
+								<li><a href="#about">About</a></li>
+								<li><a href="#collection">Collection</a></li>
+								<li><a href="#contact">Contact</a></li>
+							</ul>
+						</nav>
+					</div>
+				</header>
+			
+				<section id="hero">
+					<div class="container">
+						<h2>Your gateway to a world of knowledge</h2>
+						<p>Explore our vast collection of books and resources from the comfort of your home.</p>
+						<a href={{url_for('home')}}><button>Explore Now</button></a>
+					</div>
+				</section>
+			
+				<section id="about">
+					<div class="container">
+						<h2>About Us</h2>
+						<p>Our online library provides access to open source books, journals, and articles across various genres and subjects. Whether you're looking for the latest bestseller, academic research, or something to spark your curiosity, we have something for everyone.</p>
+					</div>
+				</section>
+			
+				<section id="collection">
+					<div class="container">
+						<h2>Our Collection</h2>
+						<div class="book-grid">
+							<div class="book">
+								<img src="book1.jpg" alt="Book 1">
+								<h3>Book Title 1</h3>
+								<p>Author 1</p>
+							</div>
+							<div class="book">
+								<img src="book2.jpg" alt="Book 2">
+								<h3>Book Title 2</h3>
+								<p>Author 2</p>
+							</div>
+							<!-- Add more books as needed -->
+						</div>
+					</div>
+				</section>
+			
+				<section id="contact">
+					<div class="container">
+						<h2>Contact Us</h2>
+						<form action="submit_form.php" method="post">
+							<label for="name">Name:</label>
+							<input type="text" id="name" name="name" required>
+							<label for="email">Email:</label>
+							<input type="email" id="email" name="email" required>
+							<label for="message">Message:</label>
+							<textarea id="message" name="message" required></textarea>
+							<button type="submit">Send Message</button>
+						</form>
+					</div>
+				</section>
+			
+				<footer>
+					<div class="container">
+						<p>&copy; 2024 Online Library. All rights reserved.</p>
+					</div>
+				</footer>
+			</div>
+		</div>
+	</body>
+</html>
