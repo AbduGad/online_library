@@ -104,22 +104,28 @@
 	</body>
 	<script>
     // Handle form submission
-    document.querySelector('form').addEventListener('submit', function(event) {
-        event.preventDefault();  // Prevent the default form submission behavior
+    document.querySelector('form').addEventListener('submit', async function(event) {
+    event.preventDefault(); // Prevent the default form submission
 
-        // Make a POST request to the Flask route
-        fetch('/submit_form', {
+    try {
+        const response = await fetch('/submit_form', {
             method: 'POST',
             body: new FormData(event.target)
-        })
-        .then(response => response.json())
-        .then(data => {
-            // Display an alert with the response message
-            alert(data.message);
-        })
-        .catch(error => {
-            console.error('Error:', error);
         });
-    });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        // Display an alert with the response message
+        alert(data.message);
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+// Assuming the form element has an ID of 'myForm'
+ );
 </script>
 </html>

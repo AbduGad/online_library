@@ -13,7 +13,7 @@
 			<div class="mid-page-container">
 				<div class="nav-bar">
 					<div style="padding-left: -10%;">
-						<a href="http://innvista.tech/landing/">	
+						<a href="/landing/">	
 							<button class="styled-button">
 								<img alt="svg image" src="../static/images/bookshelf-svgrepo-com.svg">
 							</button>
@@ -86,7 +86,7 @@
 								{%for book in books%}
 								<div>
 									<a href='http://127.0.0.1:9000/books/{{book.name}}'>
-										<img src="../static/images/pdf_images/{{book.cover_img_path}}" alt="Image 1">
+										<img src="../static/images/{{book.cover_img_path}}" alt="Image 1">
 									</a>
 									<p>{{(book.name).split('.pdf')[0]}}</p>
 								</div>
