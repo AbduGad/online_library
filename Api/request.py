@@ -14,7 +14,7 @@ item = "Books"
 url = f'http://localhost:5600/add/{item}'
 
 data = {
-    'name': 'c++-', "author": "ahmed",
+    'name': 'bit manipulation', "author": "Alx Africa",
     "tags": ["educational", "fun"]
 }
 
