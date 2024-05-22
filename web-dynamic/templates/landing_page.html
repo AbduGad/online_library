@@ -12,8 +12,10 @@
 			<div class="content">
 				<header>
 					<div class="container">
-						<h1><img alt="svg image" src="../static/images/bookshelf-svgrepo-com.svg" style="height: 50px; background-color: #ffffff; margin-top: -30px">
-							Welcome to the Online Library</h1>
+						<h1>
+							<img alt="svg image" src="../static/images/bookshelf-svgrepo-com.svg" style="height: 50px; margin-top: -30px">
+							<span>Welcome to the Online Library</span>
+						</h1>
 						<nav>
 							<ul>
 								<li><a href="#about">About</a></li>
@@ -44,14 +46,22 @@
 						<h2>Our Collection</h2>
 						<div class="book-grid">
 							<div class="book">
-								<img src="book1.jpg" alt="Book 1">
-								<h3>Book Title 1</h3>
-								<p>Author 1</p>
+							{%for book in books%}
+									{%if loop.index == 2%}
+										<img src="../static/images/pdf_images/{{(book).cover_img_path}}" alt="Book 2">
+										<h3>{{book.name}}</h3>
+										<p>{{book.author}}</p>
+									{%endif%}
+								{%endfor%}
 							</div>
 							<div class="book">
-								<img src="book2.jpg" alt="Book 2">
-								<h3>Book Title 2</h3>
-								<p>Author 2</p>
+								{%for book in books%}
+									{%if loop.index == 2%}
+										<img src="../static/images/pdf_images/{{(book).cover_img_path}}" alt="Book 2">
+										<h3>{{book.name}}</h3>
+										<p>{{book.author}}</p>
+									{%endif%}
+								{%endfor%}
 							</div>
 							<!-- Add more books as needed -->
 						</div>
@@ -61,7 +71,8 @@
 				<section id="contact">
 					<div class="container">
 						<h2>Contact Us</h2>
-						<form action="submit_form.php" method="post">
+						<p> you can send us a message with your name adn email, or reach out to one of our devs.</p>
+						<form action="/submit_form" method="post">
 							<label for="name">Name:</label>
 							<input type="text" id="name" name="name" required>
 							<label for="email">Email:</label>
@@ -70,6 +81,16 @@
 							<textarea id="message" name="message" required></textarea>
 							<button type="submit">Send Message</button>
 						</form>
+						<div class="contacts">
+							Ahmed Amr  <span style="margin: 0 5px">(Full Stack Developer)</span> <a href= "https://github.com/DevAhmedAmr">
+								<img style="width: 20px; height=20px;" id="gh-icon" src="../static/images/github-mark-white.svg" alt="github"></a>
+							<br>
+							Menna <span style="margin: 0 5px">(Full Stack Developer)</span> <a href= "https://github.com/Menno007">
+								<img style="width: 20px; height=20px" id="gh-icon" src="../static/images/github-mark-white.svg" alt="github"></a>
+							<br>
+							AbdulRahman Gad <span style="margin: 0 5px">(Full Stack Developer)</span> <a href= "https://github.com/AbduGad">
+								<img style="width: 20px; height=20px" id="gh-icon" src="../static/images/github-mark-white.svg" alt="github"></a>
+						</div>
 					</div>
 				</section>
 			
@@ -81,4 +102,24 @@
 			</div>
 		</div>
 	</body>
+	<script>
+    // Handle form submission
+    document.querySelector('form').addEventListener('submit', function(event) {
+        event.preventDefault();  // Prevent the default form submission behavior
+
+        // Make a POST request to the Flask route
+        fetch('/submit_form', {
+            method: 'POST',
+            body: new FormData(event.target)
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Display an alert with the response message
+            alert(data.message);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+</script>
 </html>

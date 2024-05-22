@@ -1,12 +1,13 @@
-html, body {
-	height: 100%;
+html,
+body {
+  height: 100%;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-	justify-content: center; /* Center horizontally */
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  justify-content: center; /* Center horizontally */
 }
 
 .content {
@@ -16,128 +17,141 @@ body {
 }
 
 div.page {
-	min-width: 100%;
-	position: relative;
-	z-index: 2;
+  min-width: 100%;
+  position: relative;
+  z-index: 2;
 }
 
 div.right-half-background {
-	position:absolute;
-	top: 0;
-    left: 60%;
-    right: 0;
-    bottom: 0;
-	z-index: -1;
-	background-color: rgb(200 197 188); /* #CEC5B3 *//*rgb(240 238 226)*/
-	/*height: 100vw;*/
+  position: absolute;
+  top: 0;
+  left: 60%;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background-color: rgb(200 197 188); /* #CEC5B3 */ /*rgb(240 238 226)*/
+  /*height: 100vw;*/
 }
 
 div.left-half-background {
-	position:absolute;
-	top: 0;
-    left: 0;
-    right: 40%;
-    bottom: 0;
-	z-index: -1;
-	background-color:rgb(215 212 205); /*#DADAB7*//*rgb(253 252 247)*/	
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 40%;
+  bottom: 0;
+  z-index: -1;
+  background-color: rgb(215 212 205); /*#DADAB7*/ /*rgb(253 252 247)*/
 }
 
 header {
-    background-color: #333;
-    color: #fff;
-    padding: 1em 0;
+  background-color: #333;
+  color: #fff;
+  padding: 1em 0;
 }
 
 header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 0.5em;
 }
 
 header nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
 }
 
 header nav ul li {
-    margin: 0 1em;
+  margin: 0 1em;
 }
 
 header nav ul li a {
-    color: #fff;
-    text-decoration: none;
+  color: #ffffff;
+  text-decoration: none;
 }
 
 #hero {
-    background: url('library-background.jpg') no-repeat center center/cover;
-    color: #fff;
-    padding: 5em 0;
-    text-align: center;
+  background: url('../images/library-background.jpg') no-repeat center
+    center/cover;
+  color: #ffffff;
+  padding: 5em 0;
+  text-align: center;
+  font-size: larger;
+  text-shadow: 3px 3px #000000;
 }
 
 #hero .container {
-    max-width: 1200px;
-    margin: 0 auto;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 #hero h2 {
-    font-size: 3em;
+  font-size: 3em;
 }
 
 #hero p {
-    font-size: 1.5em;
-    margin: 1em 0;
+  font-size: 1.5em;
+  margin: 1em 0;
 }
 
 #hero button {
-    padding: 1em 2em;
-    font-size: 1em;
-    border: none;
-    background-color: #ff6f61;
-    color: #fff;
-    cursor: pointer;
+  padding: 1em 2em;
+  font-size: 1em;
+  border: none;
+  background-color: #ff6f61;
+  color: #fff;
+  cursor: pointer;
 }
 
-#about .container p{
-	font-size: larger;
+#about .container p {
+  font-size: larger;
+}
+
+#contact p {
+  font-size: larger;
 }
 
 section {
-    padding: 3em 0;
+  padding: 3em 0;
 }
 
 section .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1em;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1em;
 }
 
 .book-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2em;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2em;
 }
 
 .book {
-    flex: 1 1 calc(33.333% - 2em);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 1em;
-    text-align: center;
+  flex: 1 1 calc(33.333% - 2em);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 1em;
+  text-align: center;
 }
 
 .book img {
-    max-width: 100%;
-    height: auto;
+  max-width: 100%;
+  height: auto;
+}
+
+div.contacts {
+  padding: 20px;
+  width: 500px;
+  line-height: 30px;
 }
 
 footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 1em 0;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 1em 0;
 }

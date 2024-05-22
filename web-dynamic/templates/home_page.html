@@ -3,7 +3,7 @@
 		<meta charset="UTF-8">
 		<link rel="stylesheet" type="text/css" href="../static/styles/home_page.css" />
 		<script src="../static/scrpits/home_page.js"></script>
-		<title>ReadMe</title>
+		<title>Home</title>
 	</head>
 	<body>
 		<div style="position: fixed; z-index: 5;"></div>
@@ -13,9 +13,11 @@
 			<div class="mid-page-container">
 				<div class="nav-bar">
 					<div style="padding-left: -10%;">
-						<button class="styled-button">
-							<img alt="svg image" src="../static/images/bookshelf-svgrepo-com.svg">
-						</button>
+						<a href="http://innvista.tech/landing/">	
+							<button class="styled-button">
+								<img alt="svg image" src="../static/images/bookshelf-svgrepo-com.svg">
+							</button>
+						</a>
 					</div>
 					<div class="home-button">
 						<a href="http://innvista.tech/online_lib/">
@@ -28,6 +30,12 @@
 						<button class="styled-button" onclick="toggleShadow()">
 							<img alt="tags-button" src="../static/images/book-blank-svgrepo-com.svg">
 						</button>
+						<div id="tags-container" class="hide">
+    						<!-- Render the tags dynamically using Flask template -->
+    						{% for tag in tags %}
+        					<span>{{ tag }}</span>
+    						{% endfor %}
+						</div>
 					</div>
 					<div class="timer-button">
 						<button class="styled-button">
