@@ -14,20 +14,18 @@ item = "Books"
 url = f'http://localhost:5600/add/{item}'
 
 data = {
-    "attr": {'name': 'تعلم c++ في 5 ايام', "author": "ahmed", "path": "test"},
-    "tags": ["educational", "fun"]}
+    'name': 'c++-', "author": "ahmed",
+    "tags": ["educational", "fun"]
+}
 
-# Sending JSON data
-headers = {'Content-Type': 'application/json'}
-r = requests.post(url, headers=headers, data=json.dumps(data))
 
-print(r.status_code)
-print(r.content)
-item = "tags"
-url = f'http://localhost:5600/add/{item}'
+file = {'pdf': open('/mnt/s/alx/online_library/bit_manipulation.pdf', 'rb')}
+with open('/mnt/s/alx/online_library/bit_manipulation.pdf', 'rb') as file:
+    r = requests.post(
+        url,
 
-r = requests.post(url, headers=headers, data=json.dumps(
-    {"attr": {"name": "action"}}))
+        data=data,
+        files={'pdf': file})
 
 print(r.status_code)
 print(r.content)

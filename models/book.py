@@ -3,6 +3,8 @@
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, ForeignKey, Integer, Index
 from sqlalchemy.orm import relationship
+import os
+import sys
 # from user import user_library_association
 
 
@@ -39,4 +41,11 @@ class Books(BaseModel, Base):
 
     def __init__(self, *args, **kwargs):
         """initializes Book"""
+        book_name = kwargs.get("name")
+
+        if book_name is not None:
+            root_directory = os.path.dirname(os.path.dirname(__file__))
+            pdf_directory = os.path.join(root_directory, "pdf")
+            self.path = os.path.join(pdf_directory, book_name)
+
         super().__init__(*args, **kwargs)
