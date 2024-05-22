@@ -34,8 +34,10 @@ def hbnb():
 @app.route('/books/<book_name>', strict_slashes=False)
 def open_book(book_name):
     """ Opens pdf """
+    book = storage.getBy_name(cls=Books, name=book_name)
+
     return render_template('book_page.html',
-                           book_name=book_name)
+                           book=book)
 
 
 if __name__ == "__main__":

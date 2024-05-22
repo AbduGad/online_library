@@ -3,7 +3,7 @@
 		<meta charset="UTF-8">
 		<link rel="stylesheet" type="text/css" href="../static/styles/home_page.css" />
 		<script src="../static/scrpits/home_page.js"></script>
-		<title>{{book_name}}</title>
+		<title>{{book.name}}</title>
 	</head>
 	<body>
 		<div style="position: fixed; z-index: 5;"></div>
@@ -40,7 +40,7 @@
 				</div>
 				<div class="horizontal-line">
 				</div>
-				<embed src="../static/{{book_name}}" type="application/pdf" width="100%" height="100%">
+				<embed src="../static/{{book.path}}" type="application/pdf" width="100%" height="100%">
 		</div>
 	</body>
 </html>
