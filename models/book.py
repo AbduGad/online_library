@@ -1,8 +1,6 @@
 #!/usr/bin/python
 """ holds class City"""
 from models.base_model import BaseModel, Base
-from os import getenv
-import sqlalchemy
 from sqlalchemy import Column, String, ForeignKey, Integer, Index
 from sqlalchemy.orm import relationship
 # from user import user_library_association

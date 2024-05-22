@@ -7,6 +7,7 @@ from models.book import Books
 from models.book_tags import Books_tags
 from models.tags import Tags
 from models.book import Books
+from models.user_support_messages import User_support
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy_utils import database_exists, create_database
@@ -17,6 +18,7 @@ available_classes = {
     "Books": Books,
     "tags": Tags,
     "Books_tags": Books_tags,
+    "User_support": User_support 
 }
 
 association_tables = {"Books_tags": Books_tags}
@@ -36,8 +38,8 @@ class DBStorage:
         self.dataBase_name = database_name
         self.instance_name = instance_name
 
-        db_uri = 'mysql+mysqldb://{}:{}@{}/{}'.format("root",
-                                                      "123",
+        db_uri = 'mysql+mysqldb://{}:{}@{}/{}'.format("abdo",
+                                                      "ebdo",
                                                       "localhost",
                                                       self.dataBase_name)
 
