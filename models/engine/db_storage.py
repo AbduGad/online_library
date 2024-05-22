@@ -38,8 +38,8 @@ class DBStorage:
         self.dataBase_name = database_name
         self.instance_name = instance_name
 
-        db_uri = 'mysql+mysqldb://{}:{}@{}/{}'.format("abdo",
-                                                      "ebdo",
+        db_uri = 'mysql+mysqldb://{}:{}@{}/{}'.format("root",
+                                                      "123",
                                                       "localhost",
                                                       self.dataBase_name)
 

@@ -46,9 +46,13 @@
 						<h2>Our Collection</h2>
 						<div class="book-grid">
 							<div class="book">
-								<img src="../static/images/pdf_images/{{(books|first).cover_img_path}}" alt="Book 1">
-								<h3>{{(books|first).name}}</h3>
-								<p>{{(books|first).author}}</p>
+							{%for book in books%}
+									{%if loop.index == 2%}
+										<img src="../static/images/pdf_images/{{(book).cover_img_path}}" alt="Book 2">
+										<h3>{{book.name}}</h3>
+										<p>{{book.author}}</p>
+									{%endif%}
+								{%endfor%}
 							</div>
 							<div class="book">
 								{%for book in books%}
